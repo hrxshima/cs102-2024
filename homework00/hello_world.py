@@ -1,6 +1,3 @@
+"""Команда выводит текст на экран
 def text():
-    message = "Hello,world!"
-    return message
-
-if name == "main":
-    print(text())
+    return "message"
