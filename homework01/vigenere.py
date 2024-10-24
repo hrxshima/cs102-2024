@@ -9,7 +9,16 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+    keyword_repeated = (keyword * (len(plaintext) // len(keyword) + 1))[:len(plaintext)]
+    
+    for p_char, k_char in zip(plaintext, keyword_repeated):
+        if p_char.isalpha():  # Проверяем, что символ является буквой
+            shift = ord(k_char.upper()) - ord('A')  # Сдвиг на основе ключа
+            base = ord('A') if p_char.isupper() else ord('a')
+            encrypted_char = chr((ord(p_char) - base + shift) % 26 + base)
+            ciphertext += encrypted_char
+        else:
+            ciphertext += p_char  # Не изменяем не-буквенные символы
     return ciphertext
 
 
@@ -24,5 +33,9 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    for char in ciphertext:
+        if char.isalpha():
+            shift_base = ord('A') if char.isupper() else ord('a')
+            plaintext += chr((ord(char) - shift_base - shift) % 26 + shift_base)
+        else: plaintext += char  
     return plaintext
