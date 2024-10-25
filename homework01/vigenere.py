@@ -33,10 +33,15 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    for char in ciphertext:
-        if char.isalpha():
-            shift_base = ord('A') if char.isupper() else ord('a')
-            plaintext += chr((ord(char) - shift_base - shift) % 26 + shift_base)
+    keyword_repeated = (keyword * (len(ciphertext) // len(keyword) + 1))[:len(ciphertext)]
+
+    for c_char, k_char in zip(ciphertext, keyword_repeated):
+        if c_char.isalpha():  # Проверяем, что символ является буквой
+            shift = ord(k_char.upper()) - ord('A')  # Сдвиг на основе ключа
+            base = ord('A') if c_char.isupper() else ord('a')
+            decrypted_char = chr((ord(c_char) - base - shift) % 26 + base)
+            plaintext += decrypted_char
         else:
-            plaintext += char
+            plaintext += c_char  # Не изменяем не-буквенные символы
+
     return plaintext
