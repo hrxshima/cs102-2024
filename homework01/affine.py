@@ -1,5 +1,5 @@
 def encrypt_affine(plaintext, a, b):
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
     m = len(alphabet)
 
     def affine_encrypt_char(char, a, b):
@@ -13,7 +13,7 @@ def encrypt_affine(plaintext, a, b):
         return encrypted_char
 
 
-    ciphertext = ''.join(affine_encrypt_char(char, a, b) for char in plaintext)
+    ciphertext = "".join(affine_encrypt_char(char, a, b) for char in plaintext)
     return ciphertext
 
 # Пример использования
