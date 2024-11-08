@@ -1,6 +1,8 @@
 """
 Модуль для реализации шифра Виженера.
 """
+
+
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     Encrypts plaintext using a Vigenere cipher.
@@ -12,12 +14,12 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    keyword_repeated = (keyword * (len(plaintext) // len(keyword) + 1))[:len(plaintext)]
+    keyword_repeated = (keyword * (len(plaintext) // len(keyword) + 1))[: len(plaintext)]
 
     for p_char, k_char in zip(plaintext, keyword_repeated):
         if p_char.isalpha():
-            shift = ord(k_char.upper()) - ord('A')
-            base = ord('A') if p_char.isupper() else ord('a')
+            shift = ord(k_char.upper()) - ord("A")
+            base = ord("A") if p_char.isupper() else ord("a")
             encrypted_char = chr((ord(p_char) - base + shift) % 26 + base)
             ciphertext += encrypted_char
         else:
@@ -36,12 +38,12 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    keyword_repeated = (keyword * (len(ciphertext) // len(keyword) + 1))[:len(ciphertext)]
+    keyword_repeated = (keyword * (len(ciphertext) // len(keyword) + 1))[: len(ciphertext)]
 
     for c_char, k_char in zip(ciphertext, keyword_repeated):
         if c_char.isalpha():
-            shift = ord(k_char.upper()) - ord('A')
-            base = ord('A') if c_char.isupper() else ord('a')
+            shift = ord(k_char.upper()) - ord("A")
+            base = ord("A") if c_char.isupper() else ord("a")
             decrypted_char = chr((ord(c_char) - base - shift) % 26 + base)
             plaintext += decrypted_char
         else:
