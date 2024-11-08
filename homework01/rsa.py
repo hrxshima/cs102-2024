@@ -5,6 +5,7 @@
 import random
 import typing as tp
 
+
 def is_prime(n: int) -> bool:
     """
     Проверяет, является ли число простым.
@@ -22,6 +23,7 @@ def is_prime(n: int) -> bool:
             return False
     return True
 
+
 def gcd(a: int, b: int) -> int:
     """
     Алгоритм Евклида для нахождения наибольшего общего делителя.
@@ -33,6 +35,7 @@ def gcd(a: int, b: int) -> int:
     while b:
         a, b = b, a % b
     return a
+
 
 def multiplicative_inverse(e: int, phi: int) -> int:
     """
@@ -57,6 +60,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
 
     return x1
 
+
 def generate_keypair(prime_p: int, prime_q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
     if not (is_prime(prime_p) and is_prime(prime_q)):
         raise ValueError("Оба числа должны быть простыми.")
@@ -76,15 +80,18 @@ def generate_keypair(prime_p: int, prime_q: int) -> tp.Tuple[tp.Tuple[int, int],
 
     return ((e, n), (d, n))
 
+
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
     key, n = pk
     cipher = [(ord(char) ** key) % n for char in plaintext]
     return cipher
 
+
 def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
     key, n = pk
     plain = [chr((char**key) % n) for char in ciphertext]
     return "".join(plain)
+
 
 if __name__ == "__main__":
     print("RSA Encrypter/ Decrypter")
